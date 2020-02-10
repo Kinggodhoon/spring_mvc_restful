@@ -5,12 +5,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="board">
 
-	<select id="findLastId" resultType="java.lang.Integer">
-		select max(boardid) from board
-	</select>
-	
+	<!-- 게시판 생성시 삽입 쿼리 -->
 	<insert id="insert" parameterType="Board">
 		insert into board values(#{boardid},#{boardname})
 	</insert>
 
+	<!-- 게시판 삭제시 삭제 쿼리 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from board where boardid = #{boardid}
+	</delete>
+	
 </mapper>

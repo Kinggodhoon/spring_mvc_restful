@@ -12,14 +12,13 @@ public class BoardDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//가장 큰 게시판 번호를 가져오는 메소드
-	public Integer findLastId() {
-		return sqlSession.selectOne("board.findLastId");
-	}
-	
 	//삽입
 	public int insert(Board board) {
 		return sqlSession.insert("board.insert",board);
+	}
+	
+	public int delete(int boardid) {
+		return sqlSession.delete("board.delete",boardid);
 	}
 	
 }
