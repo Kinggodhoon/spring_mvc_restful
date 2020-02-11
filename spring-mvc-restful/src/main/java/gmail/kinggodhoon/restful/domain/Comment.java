@@ -13,4 +13,14 @@ public class Comment {
 	private String username;
 	private String userpw;
 	private String userip;
+	
+	public Comment() {}
+	public Comment(int postid, String content, boolean ismember, String username, String userpw, String userip) {
+		this.postid = postid;
+		this.content = content;
+		this.ismember = ismember;
+		this.username = username;
+		this.userpw = userpw;
+		this.userip = userip;
+	}
 }

@@ -19,6 +19,7 @@ public class BoardJsonController {
 	@Autowired
 	private BoardService boardService;
 	
+	//게시판 생성
 	@PostMapping("/board")
 	public Map<String,Object> insert(@RequestBody HashMap<String,Object> body){
 		int boardid = Integer.parseInt(body.get("boardid").toString());
@@ -35,6 +36,7 @@ public class BoardJsonController {
 		return map;
 	}
 	
+	//게시판 리스트 보여주기
 	@GetMapping("/board")
 	public List<Board> list(){
 		List<Board> list = boardService.list();

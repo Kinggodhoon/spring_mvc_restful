@@ -1,5 +1,8 @@
 package gmail.kinggodhoon.restful;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import gmail.kinggodhoon.restful.domain.Comment;
 import gmail.kinggodhoon.restful.domain.Post;
+import gmail.kinggodhoon.restful.service.CommentService;
 import gmail.kinggodhoon.restful.service.PostService;
 
 @RestController
@@ -21,14 +26,17 @@ public class PostJsonController {
 
 	@Autowired
 	private PostService postService;
+	@Autowired
+	private CommentService commentService;
 	
+	//글 작성
 	@PostMapping("/post")
 	public Map<String,Object> insert(@RequestBody HashMap<String,Object> body){
 		System.out.println(body);
 		int boardid = Integer.parseInt(body.get("boardid").toString());
 		String title = body.get("title").toString();
 		String content = body.get("content").toString();
-		boolean ismember = Boolean.valueOf(body.get("ismember").toString());
+		boolean ismember = Boolean.parseBoolean(body.get("ismember").toString());
 		String username = body.get("username").toString();
 		String userpw = null;
 		if(body.get("userpw") != null) {
@@ -56,28 +64,33 @@ public class PostJsonController {
 		return map;
 	}
 	
+	//글 리스트 보여주기
 	@GetMapping("/posts/{boardid}")
 	public List<Post> list(@PathVariable int boardid){
 		List<Post> list = postService.list(boardid);
 		return list;
 	}
 	
+	//글 한개 조회
 	@GetMapping("/post/{postid}")
 	public Map<String,Object> getPost(@PathVariable int postid){
 		Map<String,Object> map = new HashMap<>();
 		
 		Post post = postService.getPost(postid);
-//		List<Comment> commentList = 
+		List<Comment> comments = commentService.list(postid);
 		
 		//글과 댓글을 같이 응답
+		map.put("comments", comments);
+		map.put("post",post);
 		
-		return null;
+		return map;
 	}
 	
+	//글 수정
 	@PutMapping("/post/{postid}")
 	public Map<String,Object> update(@PathVariable int postid, @RequestBody Map<String,Object> body){
-		System.out.println(body);
-		
+		Calendar cal = new GregorianCalendar();
+		Date updatetime = new Date(cal.getTimeInMillis());
 		String title = body.get("title").toString();
 		String content = body.get("content").toString();
 		
@@ -86,6 +99,7 @@ public class PostJsonController {
 		post.setPostid(postid);
 		post.setTitle(title);
 		post.setContent(content);
+		post.setUpdatetime(updatetime);
 		
 		int result = postService.update(post);
 		
@@ -96,6 +110,7 @@ public class PostJsonController {
 		return map;
 	}
 	
+	//글 조회수 늘리기
 	@PutMapping("/post/{postid}/views")
 	public Map<String,Object> increaseViews(@PathVariable int postid){
 		int result = postService.increaseViews(postid);
@@ -107,6 +122,7 @@ public class PostJsonController {
 		return map;
 	}
 	
+	//글 추천수 늘리기
 	@PutMapping("/post/{postid}/recommands")
 	public Map<String,Object> increaseRecommands(@PathVariable int postid){
 		int result = postService.increaseRecommands(postid);
@@ -118,6 +134,7 @@ public class PostJsonController {
 		return map;
 	}
 	
+	//글 삭제
 	@DeleteMapping("/post/{postid}")
 	public Map<String,Object> delete(@PathVariable int postid){
 		int result = postService.delete(postid);
@@ -129,23 +146,3 @@ public class PostJsonController {
 		return map;
 	}
 }
-////삽입
-//	public int insert(Post post);
-//	
-//	//리스트
-//	public List<Post> list(int boardid);
-//	
-//	//조회
-//	public Post getPost(int postid);
-//	
-//	//수정
-//	public int update(Post post);
-//	
-//	//조회수증가
-//	public int increaseViews(int postid);
-//	
-//	//추천수증가
-//	public int increaseRecommands(int postid);
-//	
-//	//삭제
-//	public int delete(int postid);

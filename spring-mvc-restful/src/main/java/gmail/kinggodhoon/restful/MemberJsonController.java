@@ -30,6 +30,7 @@ public class MemberJsonController {
 	@Autowired
 	private MemberService memberService;
 	
+	//유저 회원가입
 	@PostMapping("/member")
 	public Map<String,Object> register(@RequestBody HashMap<String,Object> body){
 		String username = body.get("username").toString();
@@ -47,6 +48,7 @@ public class MemberJsonController {
 		return map;
 	}
 	
+	//유저 하나 정보 가져오기
 	@GetMapping("/member/{userid}")
 	public Member getMember(@PathVariable int userid) {
 		Member member = memberService.getMember(userid);
@@ -54,6 +56,7 @@ public class MemberJsonController {
 		return member;
 	}
 	
+	//유저 닉네임 변경
 	@PutMapping("/member/{userid}")
 	public Map<String,Object> updateNickname(@PathVariable int userid, @RequestBody HashMap<String,Object> body) {
 		String nickname = body.get("nickname").toString();
@@ -67,6 +70,7 @@ public class MemberJsonController {
 		return map;
 	}
 	
+	//회원 탈퇴
 	@DeleteMapping("/member/{userid}")
 	public Map<String,Object> leaveMember(@PathVariable int userid){
 		int result = memberService.delete(userid);

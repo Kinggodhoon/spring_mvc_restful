@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into comment(postid, content, ismember, username, userpw, userip) values(#{postid}, #{content}, #{ismember}, #{username}, #{userpw}, #{userip})
 	</insert>
 
-	<select id="list" parameterType="java.lang.Integer">
+	<select id="list" parameterType="java.lang.Integer" resultType="Comment">
 		select * from comment where postid = #{postid}
 	</select>
 

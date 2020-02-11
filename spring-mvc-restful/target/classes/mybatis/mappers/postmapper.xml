@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 글 수정 쿼리 -->
 	<update id="update" parameterType="Post">
-		update post set title = #{title}, content = #{content} where postid = #{postid}
+		update post set title = #{title}, content = #{content}, updatetime = #{updatetime} where postid = #{postid}
 	</update>
 	
 	<!-- 글 추천수 증가 쿼리 -->

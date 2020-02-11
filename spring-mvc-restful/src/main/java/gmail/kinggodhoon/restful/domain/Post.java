@@ -20,7 +20,14 @@ public class Post {
 	private String userip;
 	
 	public Post() {}
-	public Post(int boardid, String title,String content, boolean ismember, String username, String userpw, String userip) {
-		
+	public Post(int boardid, String title, String content, boolean ismember, String username, String userpw,String userip) {
+		this.boardid = boardid;
+		this.title = title;
+		this.content = content;
+		this.ismember = ismember;
+		this.username = username;
+		this.userpw = userpw;
+		this.userip = userip;
 	}
+	
 }
