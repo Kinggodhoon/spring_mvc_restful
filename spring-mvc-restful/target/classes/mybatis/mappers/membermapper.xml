@@ -12,17 +12,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- memberid를 통해서 유저 한명 검색 쿼리 -->
 	<select id="getMember" parameterType="java.lang.Integer" resultType="Member">
-		select * from member where memberid = #{memberid}
+		select * from member where userid = #{userid}
 	</select>
 	
 	<!-- 닉네임 변경 쿼리 -->
 	<update id="updateNickname" parameterType="java.util.HashMap">
-		update member set nickname = #{nickname} where memberid = #{memberid}
+		update member set nickname = #{nickname} where userid = #{userid}
 	</update>
 	
 	<!-- 회원탈퇴시 호출 될 삭제 쿼리 -->
 	<delete id="delete" parameterType="java.lang.Integer">
-		delete from member where memberid = #{memberid} 
+		delete from member where userid = #{userid} 
 	</delete>
 
 </mapper>

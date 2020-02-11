@@ -17,26 +17,31 @@ public class MemberDao {
 	
 	//삽입
 	public int insert(Member member) {
-		return sqlSession.insert("member.insert");
+		try {
+			return sqlSession.insert("member.insert",member);
+		}catch(Exception e) {
+			return 0;
+		}
+		
 	}
 	
 	//유저 한명 검색
-	public Member getMember(int memberid) {
-		return sqlSession.selectOne("member.getMember", memberid);
+	public Member getMember(int userid) {
+		return sqlSession.selectOne("member.getMember", userid);
 	}
 	
 	//닉네임 변경
-	public int updateNickname(int memberid, String nickname) {
+	public int updateNickname(int userid, String nickname) {
 		Map<String,Object> parameter = new HashMap<String,Object>();
-		parameter.put("memberid", memberid);
-		parameter.put("nickname", nickname);
-		
+		parameter.put("userid", userid);
+		parameter.put("nickname", nickname);	
+		System.out.println(parameter);
 		return sqlSession.update("member.updateNickname",parameter);
 	}
 	
 	//회원탈퇴를 통한 유저 삭제
-	public int delete(int memberid) {
-		return sqlSession.delete("member.delete",memberid);
+	public int delete(int userid) {
+		return sqlSession.delete("member.delete",userid);
 	}
 	
 }

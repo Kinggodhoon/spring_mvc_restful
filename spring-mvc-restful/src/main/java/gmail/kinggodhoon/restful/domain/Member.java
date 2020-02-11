@@ -12,4 +12,14 @@ public class Member {
 	private String nickname;
 	private Date regdate;
 	private boolean isadmin;
+	
+	public Member() {}
+	
+	public Member(String username,String password, String nickname) {
+		this.username = username;
+		this.password = password;
+		this.nickname = nickname;
+	}
+	
+	
 }

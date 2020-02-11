@@ -9,7 +9,7 @@
 	<!--DB 접속을 위한 DataSource Bean 생성-->
 	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property value="jdbc:mysql:192.168.0.131:3306/spring_board?useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8" name="url" />
+		<property value="jdbc:mysql://192.168.0.131:3306/spring_board?useUnicode=true&amp;characterEncoding=utf8&amp;characterSetResults=utf8" name="url" />
 		<property value="kinggodhoon" name="username" />
 		<property value="Root**119" name="password" />
 	</bean>
