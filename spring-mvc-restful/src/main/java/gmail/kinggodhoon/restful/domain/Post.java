@@ -18,4 +18,9 @@ public class Post {
 	private String username;
 	private String userpw;
 	private String userip;
+	
+	public Post() {}
+	public Post(int boardid, String title,String content, boolean ismember, String username, String userpw, String userip) {
+		
+	}
 }

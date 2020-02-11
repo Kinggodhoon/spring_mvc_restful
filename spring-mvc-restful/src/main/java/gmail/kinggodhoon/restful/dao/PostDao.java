@@ -16,12 +16,13 @@ public class PostDao {
 	
 	//글 작성
 	public int insert(Post post) {
+		System.out.println(post);
 		return sqlSession.insert("post.insert",post);
 	}
 	
 	//글 리스트
 	public List<Post> list(int boardid){
-		return sqlSession.selectList("post.listWithBoardid",boardid);
+		return sqlSession.selectList("post.list",boardid);
 	}
 	
 	//글 조회

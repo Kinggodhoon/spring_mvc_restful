@@ -19,7 +19,7 @@ public class BoardJsonController {
 	@Autowired
 	private BoardService boardService;
 	
-	@PostMapping("/boards")
+	@PostMapping("/board")
 	public Map<String,Object> insert(@RequestBody HashMap<String,Object> body){
 		int boardid = Integer.parseInt(body.get("boardid").toString());
 		String boardname = body.get("boardname").toString();
@@ -35,7 +35,7 @@ public class BoardJsonController {
 		return map;
 	}
 	
-	@GetMapping("/boards")
+	@GetMapping("/board")
 	public List<Board> list(){
 		List<Board> list = boardService.list();
 		

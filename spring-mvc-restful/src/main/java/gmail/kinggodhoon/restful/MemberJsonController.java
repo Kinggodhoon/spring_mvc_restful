@@ -30,7 +30,7 @@ public class MemberJsonController {
 	@Autowired
 	private MemberService memberService;
 	
-	@PostMapping("/members")
+	@PostMapping("/member")
 	public Map<String,Object> register(@RequestBody HashMap<String,Object> body){
 		String username = body.get("username").toString();
 		String password = body.get("password").toString();
@@ -47,14 +47,14 @@ public class MemberJsonController {
 		return map;
 	}
 	
-	@GetMapping("/members/{userid}")
+	@GetMapping("/member/{userid}")
 	public Member getMember(@PathVariable int userid) {
 		Member member = memberService.getMember(userid);
 		
 		return member;
 	}
 	
-	@PutMapping("/members/{userid}")
+	@PutMapping("/member/{userid}")
 	public Map<String,Object> updateNickname(@PathVariable int userid, @RequestBody HashMap<String,Object> body) {
 		String nickname = body.get("nickname").toString();
 		
@@ -67,7 +67,7 @@ public class MemberJsonController {
 		return map;
 	}
 	
-	@DeleteMapping("/members/{userid}")
+	@DeleteMapping("/member/{userid}")
 	public Map<String,Object> leaveMember(@PathVariable int userid){
 		int result = memberService.delete(userid);
 		
