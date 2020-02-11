@@ -6,4 +6,10 @@ import lombok.Data;
 public class Board {
 	private int boardid;
 	private String boardname;
+	
+	public Board() {}
+	public Board(int boardid, String boardname) {
+		this.boardid = boardid;
+		this.boardname = boardname;
+	}
 }

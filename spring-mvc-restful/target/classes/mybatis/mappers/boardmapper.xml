@@ -9,10 +9,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insert" parameterType="Board">
 		insert into board values(#{boardid},#{boardname})
 	</insert>
-
-	<!-- 게시판 삭제시 삭제 쿼리 -->
-	<delete id="delete" parameterType="java.lang.Integer">
-		delete from board where boardid = #{boardid}
-	</delete>
+	
+	<!-- 게시판 리스트 받아오는 쿼리 -->
+	<select id="list" resultType="Board">
+		select * from board
+	</select>
 	
 </mapper>

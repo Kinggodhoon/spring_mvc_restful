@@ -1,5 +1,7 @@
 package gmail.kinggodhoon.restful.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,11 +16,15 @@ public class BoardDao {
 	
 	//삽입
 	public int insert(Board board) {
-		return sqlSession.insert("board.insert",board);
+		try {
+			return sqlSession.insert("board.insert",board);
+		}catch(Exception e) {
+			return 0;
+		}
 	}
 	
-	public int delete(int boardid) {
-		return sqlSession.delete("board.delete",boardid);
+	//게시판 리스트 받아오기
+	public List<Board> list(){
+		return sqlSession.selectList("board.list");
 	}
-	
 }
