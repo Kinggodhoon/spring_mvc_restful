@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gmail.kinggodhoon.restful.domain.Member;
 import gmail.kinggodhoon.restful.service.MemberService;
+import io.swagger.annotations.ApiOperation;
 
 //userid int(11) not NULL AUTO_INCREMENT PRIMARY KEY,
 //username char(20) not NULL UNIQUE,
@@ -32,12 +33,8 @@ public class MemberJsonController {
 	
 	//유저 회원가입
 	@PostMapping("/member")
-	public Map<String,Object> register(@RequestBody HashMap<String,Object> body){
-		String username = body.get("username").toString();
-		String password = body.get("password").toString();
-		String nickname = body.get("nickname").toString();
-		
-		Member member = new Member(username,password,nickname);
+	@ApiOperation(value="회원가입", notes="성공시 1을 반환 후 DB에 유저를 삽입합니다.")
+	public Map<String,Object> register(@RequestBody Member member){
 		
 		int result = memberService.insert(member);
 		
@@ -50,6 +47,7 @@ public class MemberJsonController {
 	
 	//유저 하나 정보 가져오기
 	@GetMapping("/member/{userid}")
+	@ApiOperation(value="게시판생성", notes="성공시 유저 한명을 응답합니다.")
 	public Member getMember(@PathVariable int userid) {
 		Member member = memberService.getMember(userid);
 		
@@ -58,9 +56,8 @@ public class MemberJsonController {
 	
 	//유저 닉네임 변경
 	@PutMapping("/member/{userid}")
-	public Map<String,Object> updateNickname(@PathVariable int userid, @RequestBody HashMap<String,Object> body) {
-		String nickname = body.get("nickname").toString();
-		
+	@ApiOperation(value="게시판생성", notes="성공시 1을 반환 후 DB에서 유저 닉네임을 변경합니다.")
+	public Map<String,Object> updateNickname(@PathVariable int userid, @RequestBody String nickname) {
 		int result = memberService.updateNickname(userid, nickname);
 		
 		Map<String,Object> map = new HashMap<>();

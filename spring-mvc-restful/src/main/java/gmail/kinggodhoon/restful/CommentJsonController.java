@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gmail.kinggodhoon.restful.domain.Comment;
 import gmail.kinggodhoon.restful.service.CommentService;
+import io.swagger.annotations.ApiOperation;
 
 @RestController
 public class CommentJsonController {
@@ -21,21 +22,12 @@ public class CommentJsonController {
 	
 	//댓글 작성
 	@PostMapping("/comment/{postid}")
-	public Map<String,Object> insert(@PathVariable int postid, @RequestBody Map<String,Object> body){
-		String content = body.get("content").toString();
-		boolean ismember = Boolean.parseBoolean(body.get("ismember").toString());
-		String username = body.get("username").toString();
-		String userpw = null;
-		if(body.get("userpw") != null) {
-			userpw = body.get("userpw").toString();
-		}
-		String userip = body.get("userip").toString();
-		
-		Comment comment = new Comment(postid, content, ismember, username, userpw, userip);
-		
-		int result = commentService.insert(comment);
-		
+	@ApiOperation(value="댓글작성", notes="성공시 1을 반환 후 DB에 댓글을 삽입합니다.")
+	public Map<String,Object> insert(@PathVariable int postid, @RequestBody Comment comment){
 		Map<String,Object> map = new HashMap<>();
+		
+		comment.setPostid(postid);
+		int result = commentService.insert(comment);
 		
 		map.put("result", result);
 		
