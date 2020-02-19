@@ -20,7 +20,11 @@ import gmail.kinggodhoon.restful.domain.Comment;
 import gmail.kinggodhoon.restful.domain.Post;
 import gmail.kinggodhoon.restful.service.CommentService;
 import gmail.kinggodhoon.restful.service.PostService;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Example;
+import io.swagger.annotations.ExampleProperty;
 
 @RestController
 public class PostJsonController {
@@ -70,6 +74,7 @@ public class PostJsonController {
 	//글 수정
 	@PutMapping("/post/{postid}")
 	@ApiOperation(value="글수정", notes="성공시 1을 반환합니다.")
+	@ApiImplicitParam(name="post",dataType="Post",examples= @Example(value= {@ExampleProperty(value="{'property':'test'}",mediaType="application/json")}))
 	public Map<String,Object> update(@PathVariable int postid, @RequestBody Post post){
 		Map<String,Object> map = new HashMap<>();
 		
